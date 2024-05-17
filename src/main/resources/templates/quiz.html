@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+</head>
+<body>
+<h1>Quiz</h1>
+<form action="/submit" method="post">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <div>
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" name="surname" required>
+    </div>
+    <div>
+        <h2>Questions:</h2>
+        <ul>
+            <th:block th:each="question, iterStat : ${questions}">
+                <li>
+                    <p th:text="${question.question}"></p>
+                    <div>
+                        <input type="radio" th:id="${'answer' + iterStat.index}" th:name="${'answers[' + iterStat.index + ']'}" th:value="1" required>
+                        <label th:for="${'answer' + iterStat.index}" th:text="${question.options[0]}"></label>
+                    </div>
+                    <div>
+                        <input type="radio" th:id="${'answer' + iterStat.index + '_2'}" th:name="${'answers[' + iterStat.index + ']'}" th:value="2">
+                        <label th:for="${'answer' + iterStat.index + '_2'}" th:text="${question.options[1]}"></label>
+                    </div>
+                    <div>
+                        <input type="radio" th:id="${'answer' + iterStat.index + '_3'}" th:name="${'answers[' + iterStat.index + ']'}" th:value="3">
+                        <label th:for="${'answer' + iterStat.index + '_3'}" th:text="${question.options[2]}"></label>
+                    </div>
+                    <div>
+                        <input type="radio" th:id="${'answer' + iterStat.index + '_4'}" th:name="${'answers[' + iterStat.index + ']'}" th:value="4">
+                        <label th:for="${'answer' + iterStat.index + '_4'}" th:text="${question.options[3]}"></label>
+                    </div>
+                </li>
+            </th:block>
+        </ul>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
